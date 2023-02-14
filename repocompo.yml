@@ -15,3 +15,19 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+
+#sonarr ...tv
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /docker/sonarr/config:/config
+#      - osumterra:/tv
+      - /docker/downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped    
