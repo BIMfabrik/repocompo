@@ -1,2 +1,17 @@
 version: "3.7"
 services:
+#radarr : movies     
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /docker/appdata/radarr/config:/config
+      - osumterra:/movies
+      - /docker/downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
