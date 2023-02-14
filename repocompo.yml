@@ -30,4 +30,53 @@ services:
       - /docker/downloads:/downloads #optional
     ports:
       - 8989:8989
-    restart: unless-stopped    
+    restart: unless-stopped
+#deluge donwloader
+  deluge:
+    image: lscr.io/linuxserver/deluge
+    container_name: deluge
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - /docker/deluge/config:/config
+      - /docker/downloads:/downloads
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+#lidarr songs
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /docker/lidarr/config:/config
+#     - osumterra:/music #optional
+      - /docker/downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+#readarr  Book Manager and Automation 
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /docker/readarr/config:/config
+ #     - osumterra:/books
+      - /docker/downloads:/downloads
+    ports:
+      - 8787:8787
+    restart: unless-stopped 
+
+    
