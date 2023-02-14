@@ -1,6 +1,6 @@
-version: "3.7"
+version: "3.9"
 services:
-# Start the agent with the latest version
+# Traefik HuB agent
   hub-agent:
     image: ghcr.io/traefik/hub-agent-traefik:latest
     container_name: hub-agent
@@ -16,7 +16,7 @@ services:
     depends_on:
       - traefik
 
-  # Start Traefik with the latest version
+  # Start Traefik
   traefik:
     image: traefik:latest
     container_name: traefik
