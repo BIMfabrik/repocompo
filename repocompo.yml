@@ -9,8 +9,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /docker/appdata/radarr/config:/config
-      - osumterra:/movies
+      - /docker/radarr/config:/config
+#      - osumterra:/movies
       - /docker/downloads:/downloads #optional
     ports:
       - 7878:7878
