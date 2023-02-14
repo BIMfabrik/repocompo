@@ -1,5 +1,30 @@
 version: "3.7"
 services:
+# Start the agent with the latest version
+  hub-agent:
+    image: ghcr.io/traefik/hub-agent-traefik:latest
+    container_name: hub-agent
+    restart: "on-failure"
+    command:
+      - run
+      - --hub.token=f1a1bdf2-91bb-4771-87b5-75c60cd21dd3
+      - --auth-server.advertise-url=http://hub-agent
+      - --traefik.host=traefik
+      - --traefik.tls.insecure=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - traefik
+
+  # Start Traefik with the latest version
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    command:
+      # Enable Hub communication (open the port 9900 and 9901 by default)
+      - --experimental.hub=true
+      - --hub.tls.insecure=true
+      - --metrics.prometheus.addrouterslabels=true
 #radarr : movies     
   radarr:
     image: lscr.io/linuxserver/radarr
@@ -78,5 +103,17 @@ services:
     ports:
       - 8787:8787
     restart: unless-stopped 
-
+#Prowlarr : indexer manager/proxy
+  prowlarr:
+    container_name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:develop
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /docker/prowlarr/config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
     
