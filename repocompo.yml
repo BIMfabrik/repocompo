@@ -4,7 +4,7 @@ services:
   hub-agent:
     image: ghcr.io/traefik/hub-agent-traefik:latest
     container_name: hub-agent
-    restart: "on-failure"
+    restart: unless-stopped
     command:
       - run
       - --hub.token=${TRAEF}
@@ -16,7 +16,7 @@ services:
     depends_on:
       - traefik
 
-  # Start Traefik
+# Start Traefik
   traefik:
     image: traefik:latest
     container_name: traefik
@@ -25,6 +25,7 @@ services:
       - --experimental.hub=true
       - --hub.tls.insecure=true
       - --metrics.prometheus.addrouterslabels=true
+
 #radarr : movies     
   radarr:
     image: lscr.io/linuxserver/radarr
@@ -57,6 +58,7 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+
 #deluge donwloader
   deluge:
     image: lscr.io/linuxserver/deluge
@@ -74,6 +76,7 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+
 #lidarr songs
   lidarr:
     image: lscr.io/linuxserver/lidarr
@@ -89,6 +92,7 @@ services:
     ports:
       - 8686:8686
     restart: unless-stopped
+
 #readarr  Book Manager and Automation 
   readarr:
     image: lscr.io/linuxserver/readarr:develop
@@ -104,6 +108,7 @@ services:
     ports:
       - 8787:8787
     restart: unless-stopped 
+
 #Prowlarr : indexer manager/proxy
   prowlarr:
     container_name: prowlarr
@@ -128,6 +133,7 @@ services:
       - /docker/icons:/app/public/icons
     ports:
       - 7575:7575
+
 #duplicate pcloud?
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
@@ -144,6 +150,31 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+#plex
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:      
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX}
+    volumes:
+      - /docker/plex/config:/config
+      - /mnt/USB8TB:/media
+    ports:
+      - "32400:32400" # (for access to the Plex Media Server) [required]
+      - "3005:3005" # (for controlling Plex Home Theater via Plex Companion)
+      - "8324:8324" # (for controlling Plex for Roku via Plex Companion)
+      - "32410:32410/udp" # (for current GDM network discovery)
+      - "32412:32412/udp" # (for current GDM network discovery)
+      - "32413:32413/udp" # (for current GDM network discovery)
+      - "32414:32414/udp" # (for current GDM network discovery)
+      - "32469:32469" # (for access to the Plex DLNA Server)
+    restart: unless-stopped
+
 #volumes
 volumes:
   USB8TB:
