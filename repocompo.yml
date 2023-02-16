@@ -35,8 +35,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/radarr/config:/config
-#      - osumterra:/movies
-      - USB256SSD:/movies
+      - USB8TB_Movies:/movies
       - /docker/downloads:/downloads #optional
     ports:
       - 7878:7878
@@ -52,7 +51,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/sonarr/config:/config
-#      - osumterra:/tv
+      - USB8TB_TV:/tv
       - /docker/downloads:/downloads #optional
     ports:
       - 8989:8989
