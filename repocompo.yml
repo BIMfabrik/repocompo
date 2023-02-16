@@ -143,3 +143,9 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+#volumes
+volumes:
+  USB256:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /media/jin/USB256SSD
