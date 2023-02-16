@@ -36,6 +36,7 @@ services:
     volumes:
       - /docker/radarr/config:/config
 #      - osumterra:/movies
+#      - USB256SSD:/movies
       - /docker/downloads:/downloads #optional
     ports:
       - 7878:7878
@@ -145,7 +146,7 @@ services:
     restart: unless-stopped
 #volumes
 volumes:
-  USB256:
+  USB256SSD:
     driver: local-persist
     driver_opts:
       mountpoint: /media/jin/USB256SSD
