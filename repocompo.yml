@@ -146,7 +146,19 @@ services:
     restart: unless-stopped
 #volumes
 volumes:
-  USB256SSD:
+  USB8TB:
     driver: local-persist
     driver_opts:
-      mountpoint: /media/jin/USB256SSD
+      mountpoint: /mnt/USB8TB
+  USB8TB_Movie:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /mnt/USB8TB/_Video_Movies
+  USB8TB_TV:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /mnt/USB8TB/_Video_TV
+  USB8TB_Music:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /mnt/USB8TB/_Music
