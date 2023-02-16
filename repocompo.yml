@@ -35,7 +35,8 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/radarr/config:/config
-      - USB8TB_Movies:/movies
+#      - USB8TB_Movies:/movies
+      - /mnt/USB8TB/_Video_Movies:/movies
       - /docker/downloads:/downloads #optional
     ports:
       - 7878:7878
@@ -51,7 +52,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/sonarr/config:/config
-      - USB8TB_TV:/tv
+#      - USB8TB_TV:/tv
       - /docker/downloads:/downloads #optional
     ports:
       - 8989:8989
