@@ -36,8 +36,8 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/radarr/config:/config
-      - /mnt/USB8TB/_Video_Movies:/movies
-      - /docker/downloads:/downloads #optional
+      - 8_Movies:/movies
+      - 256_DWNL:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -52,8 +52,8 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/sonarr/config:/config
-      - /mnt/USB8TB/_Video_TV:/tv
-      - /docker/downloads:/downloads #optional
+      - 8_TV:/tv
+      - 256_DWNL:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -69,14 +69,14 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - /docker/deluge/config:/config
-      - /docker/downloads:/downloads
+      - 256_DWNL:/downloads
     ports:
       - 8112:8112
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
 
-#lidarr songs
+#lidarr s ongs
   lidarr:
     image: lscr.io/linuxserver/lidarr
     container_name: lidarr
@@ -87,7 +87,7 @@ services:
     volumes:
       - /docker/lidarr/config:/config
 #     - osumterra:/music #optional
-      - /docker/downloads:/downloads
+      - 256_DWNL:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -103,7 +103,7 @@ services:
     volumes:
       - /docker/readarr/config:/config
  #     - osumterra:/books
-      - /docker/downloads:/downloads
+      - 256_DWNL:/downloads
     ports:
       - 8787:8787
     restart: unless-stopped 
@@ -162,9 +162,9 @@ services:
       - PLEX_CLAIM=${PLEX}
     volumes:
       - /docker/plex/config:/config
-      - /mnt/USB8TB:/media
-      - /mnt/USB8TB/_Video_Movies:/movies
-      - /mnt/USB8TB/_Video_TV:/tv
+      - USB8TB:/media
+      - 8_Movies:/movies
+      - 8_TV:/tv
     ports:
       - "32400:32400" # (for access to the Plex Media Server) [required]
       - "3005:3005" # (for controlling Plex Home Theater via Plex Companion)
@@ -184,7 +184,7 @@ services:
     volumes:
       - /docker/jellyfin/config:/config
       - /docker/jellyfin/cache:/cache
-      - /mnt/USB8TB/:/media
+      - USB8TB:/media
 #      - /path/to/media2:/media2:ro
     restart: unless-stopped
     # Optional - alternative address used for autodiscovery
@@ -213,4 +213,17 @@ volumes:
   USB8TB:
     driver: local-persist
     driver_opts:
-      mountpoint: /mnt/USB8TB
+      mountpoint: /media/jin/1.44.1-42661/
+      
+  8_Movie:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /media/jin/1.44.1-42661/_Video_Movies
+  8_TV:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /media/jin/1.44.1-42661/_Video_Tv
+  256_DWNL:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /media/jin/USB256SSD/_dwlds
