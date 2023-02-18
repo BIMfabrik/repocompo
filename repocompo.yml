@@ -214,7 +214,7 @@ volumes:
     driver: local-persist
     driver_opts:
       mountpoint: /media/jin/1.44.1-42661/
-  8_Movie:
+  8_Movies:
     driver: local-persist
     driver_opts:
       mountpoint: /media/jin/1.44.1-42661/_Video_Movies
