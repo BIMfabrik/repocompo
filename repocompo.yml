@@ -163,8 +163,6 @@ services:
     volumes:
       - /docker/plex/config:/config
       - USB8TB:/media
-      - 8_Movies:/movies
-      - 8_TV:/tv
     ports:
       - "32400:32400" # (for access to the Plex Media Server) [required]
       - "3005:3005" # (for controlling Plex Home Theater via Plex Companion)
