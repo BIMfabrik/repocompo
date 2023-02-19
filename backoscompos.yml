@@ -7,7 +7,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-    env_file:
+@    env_file:
 #      - .env.icloud #should contain ENV_ICLOUD_PASSWORD=<password>
     container_name: icloud
     restart: unless-stopped
