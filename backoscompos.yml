@@ -30,8 +30,14 @@ services:
       - CLI_ARGS= #optional
     volumes:
       - /docker/duplicati/config:/config
-      - /docker/duplicati/backups:/backups
+      - 256_BCK:/backups
       - /docker/duplicati/source:/source
     ports:
       - 8200:8200
     restart: unless-stopped
+#volumes
+volumes:  
+  256_BCK:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /media/jin/USB256SSD/_bck
