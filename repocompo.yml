@@ -215,15 +215,15 @@ volumes:
   USB8TB:
     driver: local-persist
     driver_opts:
-      mountpoint: /media/jin/1.44.1-42661/
+      mountpoint: /media/jin/1.44.1-426611/
   8_Movies:
     driver: local-persist
     driver_opts:
-      mountpoint: /media/jin/1.44.1-42661/_Video_Movies
+      mountpoint: /media/jin/1.44.1-426611/_Video_Movies
   8_TV:
     driver: local-persist
     driver_opts:
-      mountpoint: /media/jin/1.44.1-42661/_Video_Tv
+      mountpoint: /media/jin/1.44.1-426611/_Video_Tv
   256_DWNL:
     driver: local-persist
     driver_opts:
