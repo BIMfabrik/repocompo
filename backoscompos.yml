@@ -1,19 +1,37 @@
-version: "3.4"
+version: "3.8"
 services:
-#backup iphotos
-  icloud:
-    image: mandarons/icloud-drive
-    environment:
+
+  icloudpd:
+      image: boredazfcuk/icloudpd
+      container_name: icloudpd
+      env_file:
+         - example.env
+      environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      healthcheck:
+         test: /usr/local/bin/healthcheck.sh
+         start_period: 30s
+      restart: always
+      volumes:
+         - /docker/icloudpd/config:/config
+         - 256_BCK:/home/${user}/iCloud/
+         
+#backup iphotos
+#  icloud:
+#    image: mandarons/icloud-drive
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
 #    env_file:
 #      - .env.icloud #should contain ENV_ICLOUD_PASSWORD=<password>
-    container_name: icloud
-    restart: unless-stopped
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+#    container_name: icloud
+#    restart: unless-stopped
+#    volumes:
+#      - /etc/timezone:/etc/timezone:ro
+#      - /etc/localtime:/etc/localtime:ro
 #      - ${PWD}/icloud/config.yaml:/app/config.yaml
 #      - ${PWD}/icloud/data:/app/icloud
 #      - ${PWD}/session_data:/app/session_data
