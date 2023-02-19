@@ -16,3 +16,21 @@ services:
 #      - ${PWD}/icloud/config.yaml:/app/config.yaml
 #      - ${PWD}/icloud/data:/app/icloud
 #      - ${PWD}/session_data:/app/session_data
+
+
+#duplicate pcloud?
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - CLI_ARGS= #optional
+    volumes:
+      - /docker/duplicati/config:/config
+      - /docker/duplicati/backups:/backups
+      - /docker/duplicati/source:/source
+    ports:
+      - 8200:8200
+    restart: unless-stopped
