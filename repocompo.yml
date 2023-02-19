@@ -37,6 +37,7 @@ services:
     volumes:
       - /docker/radarr/config:/config
       - 8_Movies:/movies
+      - USB8TB:/USB8TB
       - 256_DWNL:/downloads #optional
     ports:
       - 7878:7878
@@ -53,6 +54,7 @@ services:
     volumes:
       - /docker/sonarr/config:/config
       - 8_TV:/tv
+      - USB8TB:/USB8TB
       - 256_DWNL:/downloads #optional
     ports:
       - 8989:8989
