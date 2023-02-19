@@ -133,22 +133,7 @@ services:
     ports:
       - 7575:7575
 
-#duplicate pcloud?
-  duplicati:
-    image: lscr.io/linuxserver/duplicati:latest
-    container_name: duplicati
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - CLI_ARGS= #optional
-    volumes:
-      - /docker/duplicati/config:/config
-      - /docker/duplicati/backups:/backups
-      - /docker/duplicati/source:/source
-    ports:
-      - 8200:8200
-    restart: unless-stopped
+
 #plex
   plex:
     image: lscr.io/linuxserver/plex:latest
