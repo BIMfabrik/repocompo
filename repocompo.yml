@@ -36,9 +36,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/radarr/config:/config
-      - 8_Movies:/movies
-      - 8_Movies/_Video_Movies:/abctestMovies
-      - USB8TB:/USB8TB
+      - USB8TB:/movies
       - 256_DWNL:/downloads #optional
     ports:
       - 7878:7878
@@ -54,8 +52,7 @@ services:
       - TZ=${TZ}
     volumes:
       - /docker/sonarr/config:/config
-      - 8_TV:/tv
-      - USB8TB:/USB8TB
+      - USB8TB:/tv
       - 256_DWNL:/downloads #optional
     ports:
       - 8989:8989
@@ -217,14 +214,6 @@ volumes:
     driver: local-persist
     driver_opts:
       mountpoint: /media/jin/1.44.1-426611/
-  8_Movies:
-    driver: local-persist
-    driver_opts:
-      mountpoint: /media/jin/1.44.1-426611/_Video_Movies
-  8_TV:
-    driver: local-persist
-    driver_opts:
-      mountpoint: /media/jin/1.44.1-426611/_Video_Tv
   256_DWNL:
     driver: local-persist
     driver_opts:
