@@ -4,8 +4,9 @@ services:
   icloud:
     image: mandarons/icloud-drive
     environment:
-      - PUID=1000
-      - GUID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     env_file:
 #      - .env.icloud #should contain ENV_ICLOUD_PASSWORD=<password>
     container_name: icloud
