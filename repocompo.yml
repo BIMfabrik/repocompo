@@ -37,6 +37,7 @@ services:
     volumes:
       - /docker/radarr/config:/config
       - 8_Movies:/movies
+      - 8_Movies/_Video_Movies:/abctestMovies
       - USB8TB:/USB8TB
       - 256_DWNL:/downloads #optional
     ports:
