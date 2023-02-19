@@ -4,8 +4,8 @@ services:
   icloudpd:
       image: boredazfcuk/icloudpd
       container_name: icloudpd
-      env_file:
-         - example.env
+#      env_file:
+#         - example.env
       environment:
       - PUID=${PUID}
       - PGID=${PGID}
